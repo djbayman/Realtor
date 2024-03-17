@@ -1,10 +1,27 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { StateContext } from "../context/StatesContext";
 
-const NavTow = () => {
+const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const location = useLocation();
+  const catMenu = useRef(null);
+  const { pathname } = location;
   const { setStateProps } = useContext(StateContext);
+
+  const handleOnClick = (prop) => {
+    setStateProps((prevState) => ({
+      ...prevState,
+      purpose: prop,
+    }));
+  };
+  const closeOpenMenus = (e) => {
+    if (showMenu && !catMenu.current?.contains(e.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  document.addEventListener("mousedown", closeOpenMenus);
 
   return (
     <>
@@ -13,14 +30,15 @@ const NavTow = () => {
           <h1 className="text-4xl text-blue-500 font-extrabold">Realtor</h1>
         </Link>
 
-        <div className="relative" id="navbar-hamburger">
+        <div className="relative" id="navbar-hamburger" ref={catMenu}>
           <button
+            id="nav-humb"
             data-collapse-toggle="navbar-hamburger"
             type="button"
             className="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="navbar-hamburger"
             aria-expanded="false"
-            onClick={() => setShowMenu(!showMenu)}
+            onClick={(e) => setShowMenu(!showMenu)}
           >
             <span className="sr-only">Open main menu</span>
             <svg
@@ -53,7 +71,11 @@ const NavTow = () => {
             <li>
               <Link
                 to={"/"}
-                className="block py-2 px-3 text-white bg-blue-500 rounded dark:bg-blue-600"
+                className={`${
+                  pathname === "/"
+                    ? "dark:bg-blue-600 bg-blue-500 text-white "
+                    : ""
+                }block py-2 px-3   rounded  `}
                 aria-current="page"
               >
                 Home
@@ -62,7 +84,11 @@ const NavTow = () => {
             <li>
               <Link
                 to={"/search"}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className={`${
+                  pathname === "/search"
+                    ? "dark:bg-blue-600 bg-blue-500 text-white "
+                    : ""
+                }block py-2 px-3   rounded   `}
               >
                 Search
               </Link>
@@ -70,13 +96,12 @@ const NavTow = () => {
             <li>
               <Link
                 to={"/search/purpose=for-sale"}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white"
-                onClick={() =>
-                  setStateProps((prevState) => ({
-                    ...prevState,
-                    purpose: "for-sale",
-                  }))
-                }
+                className={`${
+                  pathname === "/search/purpose=for-sale"
+                    ? "dark:bg-blue-600 bg-blue-500 text-white "
+                    : ""
+                }block py-2 px-3   rounded   `}
+                onClick={() => handleOnClick("for-sale")}
               >
                 Buy
               </Link>
@@ -84,13 +109,14 @@ const NavTow = () => {
             <li>
               <Link
                 to={"/search/purpose=for-rent"}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                onClick={() =>
-                  setStateProps((prevState) => ({
-                    ...prevState,
-                    purpose: "for-rent",
-                  }))
-                }
+                className={`${
+                  pathname === "/search/purpose=for-rent"
+                    ? "dark:bg-blue-600 bg-blue-500 text-white "
+                    : ""
+                }block py-2 px-3   rounded   `}
+                onClick={() => {
+                  handleOnClick("for-rent");
+                }}
               >
                 Rent
               </Link>
@@ -102,4 +128,4 @@ const NavTow = () => {
   );
 };
 
-export default NavTow;
+export default Nav;

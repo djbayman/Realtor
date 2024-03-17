@@ -1,17 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import Selects from "./Selects";
 import Proprties from "./Proprties";
-import useAxios from "../hooks/useAxios";
 import { StateContext } from "../context/StatesContext";
-import Researched from "./Researched";
 
 const Search = () => {
-  const [showFilter, setShowFilter] = useState(false);
+  const [showFilter, setShowFilter] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
   const { stateProps, data, setFilteredData } = useContext(StateContext);
 
-  // console.log(data);
   useEffect(() => {
     if (data && searchTerm !== "") {
       setFilteredData(
@@ -47,7 +44,7 @@ const Search = () => {
           </div>
           <input
             type="text"
-            placeholder="Search For Location..."
+            placeholder="Search By Location Ex:Plazzo Heights"
             onChange={(e) => setSearchTerm(e.target.value)}
             className="block w-96  text-xl text-gray-400 py-2 px-3 mx-auto rounded-lg outline-none"
           />

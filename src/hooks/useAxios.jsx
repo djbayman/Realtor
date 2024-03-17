@@ -6,7 +6,6 @@ axios.defaults.baseURL = "https://bayut.p.rapidapi.com";
 
 const useAxios = () => {
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState([]);
 
   const fetchData = async (url) => {
     try {
@@ -18,11 +17,7 @@ const useAxios = () => {
           "X-RapidAPI-Host": "bayut.p.rapidapi.com",
         },
       });
-      // console.log(result.data);
-      // setResponse(result.data);
       return result.data;
-
-      // setApiResponse(result.data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -30,13 +25,8 @@ const useAxios = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   return {
     fetchData: (url) => fetchData(url),
-    response,
     loading,
   };
 };

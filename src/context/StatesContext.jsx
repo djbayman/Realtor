@@ -18,10 +18,11 @@ const StatesProvider = ({ children }) => {
 
   const fetchDataMemoized = useCallback(() => {
     fetchData(
-      `https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002,6020&purpose=${stateProps.purpose}&priceMin=${stateProps.priceMin}&priceMax=${stateProps.priceMax}&roomMax=${stateProps.roomMax}&bathMax=${stateProps.bathMax}`
+      `https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002,6020&purpose=${stateProps.purpose}&priceMin=${stateProps.priceMin}&priceMax=${stateProps.priceMax}&roomsMax=${stateProps.roomsMax}&bathsMax=${stateProps.bathsMax}`
     ).then((result) => {
       setData(result?.hits);
     });
+    console.log(stateProps);
   }, [stateProps]);
 
   useEffect(() => {

@@ -1,14 +1,14 @@
 // import Nav from "./components/Nav";
 import { Route, Routes } from "react-router-dom";
-import NavTow from "./components/NavTow";
+import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Property from "./components/Property";
 import Search from "./components/Search";
 
 function App() {
   return (
-    <div className="container mx-auto">
-      <NavTow />
+    <div className="container mx-auto px-4">
+      <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/property/:externalID" element={<Property />} />

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import CustomSlider from "./Carousel";
 import { useContext } from "react";
 import { StateContext } from "../context/StatesContext";
 import millify from "millify";
@@ -15,9 +14,6 @@ const Property = () => {
   console.log(specificProperty[0].price);
   return (
     <div>
-      {/* <CustomSlider coverPhoto={specificProperty[0]?.coverPhoto.url}/>
-       */}
-
       <img
         src={specificProperty[0]?.coverPhoto.url}
         alt=""
