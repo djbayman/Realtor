@@ -22,7 +22,6 @@ const StatesProvider = ({ children }) => {
     ).then((result) => {
       setData(result?.hits);
     });
-    console.log(stateProps);
   }, [stateProps]);
 
   useEffect(() => {

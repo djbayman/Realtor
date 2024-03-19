@@ -25,7 +25,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className=" flex flex-wrap items-center justify-between mx-auto p-4 border-b-2 border-blue-200">
+      <div className=" flex flex-wrap items-center justify-between mx-auto p-4 border-b-4 border-blue-200">
         <Link to="/">
           <h1 className="text-4xl text-blue-500 font-extrabold">Realtor</h1>
         </Link>

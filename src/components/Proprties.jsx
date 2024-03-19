@@ -3,6 +3,7 @@ import { StateContext } from "../context/StatesContext";
 import useAxios from "../hooks/useAxios";
 import { useContext } from "react";
 import { Loader } from "react-feather";
+import millify from "millify";
 
 const Proprties = () => {
   const { data, filteredData, stateProps } = useContext(StateContext);
@@ -85,11 +86,27 @@ const Proprties = () => {
                 >
                   <path d="M32 32c17.7 0 32 14.3 32 32v256h224V160c0-17.7 14.3-32 32-32h224c53 0 96 43 96 96v224c0 17.7-14.3 32-32 32s-32-14.3-32-32v-32H64v32c0 17.7-14.3 32-32 32S0 465.7 0 448V64c0-17.7 14.3-32 32-32zm144 256c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z" />
                 </svg>
+                |
+              </p>
+              <p className="flex gap-4">
+                {millify(item?.area)} sqft
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-8 h-8 text-blue-400"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </p>
             </div>
             <div className="more-info mt-4">
               <p className=" text-gray-600 text-base font-medium">
-                {item.title.length > 25
+                {item.title.length > 40
                   ? item.title.substring(0, 40) + "..."
                   : item.title}
               </p>

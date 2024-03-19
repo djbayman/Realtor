@@ -1,25 +1,27 @@
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import { StateContext } from "../context/StatesContext";
+import { useEffect, useState } from "react";
 import millify from "millify";
+import useAxios from "../hooks/useAxios";
+import Carousel from "./Carousel";
 
 const Property = () => {
+  const [propertyData, setPropertyData] = useState({});
   const { externalID } = useParams();
-  const { data } = useContext(StateContext);
+  const { fetchData } = useAxios();
 
-  const specificProperty = data.filter(
-    (item) => item?.externalID === externalID
-  );
+  useEffect(() => {
+    fetchData(
+      `https://bayut.p.rapidapi.com/properties/detail/?externalID=${externalID}`
+    ).then((res) => setPropertyData(res));
+  }, [externalID]);
 
-  console.log(specificProperty[0].price);
+  const photos = propertyData.photos?.map((photo) => photo.url);
+  console.log(propertyData);
+  console.log(photos);
+
   return (
-    <div>
-      <img
-        src={specificProperty[0]?.coverPhoto.url}
-        alt=""
-        className="w-full"
-        style={{ height: "600px" }}
-      />
+    <div className="my-6">
+      {photos && <Carousel photos={photos} />}
 
       <div className="price flex items-center  my-5 text-2xl font-medium gap-2 ">
         <svg
@@ -38,17 +40,18 @@ const Property = () => {
         </svg>
 
         <p className="ps-12 text-2xl font-bold">
-          AED {specificProperty[0]?.price}/monthly
+          AED {propertyData?.price}{" "}
+          {propertyData?.purpose === "for-sale" ? "" : "/Monthly"}
         </p>
         <img
-          src={specificProperty[0]?.agency.logo.url}
+          src={propertyData?.agency?.logo.url}
           alt=""
-          className="w-12 h-12 rounded-full ms-auto"
+          className="w-20 h-20 rounded-full ms-auto"
         />
       </div>
       <div className="room-details flex items-center gap-8 text-2xl font-medium mb-4">
         <p className="flex gap-8">
-          {specificProperty[0]?.baths}
+          {propertyData?.baths}
           <svg
             viewBox="0 0 512 512"
             fill="currentColor"
@@ -61,7 +64,7 @@ const Property = () => {
           |
         </p>
         <p className="flex gap-8">
-          {specificProperty[0]?.rooms}
+          {propertyData?.rooms}
           <svg
             viewBox="0 0 640 512"
             fill="currentColor"
@@ -74,7 +77,7 @@ const Property = () => {
           |
         </p>
         <p className="flex gap-8">
-          {millify(specificProperty[0]?.area)} sqft
+          {millify(propertyData?.area)} sqft
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -90,38 +93,29 @@ const Property = () => {
         </p>
       </div>
       <div>
-        <h1 className="text-3xl font-bold my-10">
-          {specificProperty[0]?.title}
-        </h1>
-        {/* <p className="text-gray-400 text-xl leading-10">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo iste
-          modi, error earum incidunt sapiente voluptas sit nulla unde excepturi
-          exercitationem, facere neque? Libero soluta unde maxime facilis
-          quibusdam totam!
-        </p> */}
+        <h1 className="text-3xl font-bold my-10">{propertyData?.title}</h1>
+        <p className="text-gray-400 text-xl leading-10">
+          {propertyData?.description}
+        </p>
         <div className="flex items-center justify-between gap-5 my-5">
           <p className="flex items-center text-xl w-1/2 justify-between">
             <span className="text-gray-400 text-xl">TYPE:</span>{" "}
-            <span className="font-bold  text-xl">
-              {specificProperty[0]?.type}
-            </span>
+            <span className="font-bold  text-xl">{propertyData?.type}</span>
           </p>
           <p className="flex items-center text-xl w-1/2 justify-between">
             <span className="text-gray-400 text-xl">PURPOSE:</span>{" "}
-            <span className="font-bold  text-xl">
-              {specificProperty[0]?.purpose}
-            </span>
+            <span className="font-bold  text-xl">{propertyData?.purpose}</span>
           </p>
         </div>
         <div className="">
-          <h2 className="text-3xl font-bold ">Facilties:</h2>
+          <h2 className="text-3xl font-bold ">Categories:</h2>
           <ul className="flex flex-wrap gap-4 my-4">
-            {specificProperty[0]?.keywords.map((key, index) => (
+            {propertyData?.category?.map((key, index) => (
               <li
                 key={index}
                 className="text-xl text-blue-400 bg-gray-200 font-bold py-2 px-4 w-fit rounded m-1"
               >
-                {key}
+                {key.name}
               </li>
             ))}
           </ul>
