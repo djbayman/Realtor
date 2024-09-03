@@ -1,32 +1,39 @@
-import { useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import axios from "axios";
+import { StateContext } from "../context/StatesContext";
 
 axios.defaults.baseURL = "https://bayut.p.rapidapi.com";
 
 const useAxios = () => {
-  const [loading, setLoading] = useState(false);
+  const { setData } = useContext(StateContext);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchData = async (url) => {
-    try {
-      setLoading(true);
-      const result = await axios.get(url, {
-        headers: {
-          "X-RapidAPI-Key":
-            "909ce48e25mshc893eb9cd44e5a4p17a611jsnaeadd2eefda1",
-          "X-RapidAPI-Host": "bayut.p.rapidapi.com",
-        },
-      });
-      return result.data;
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchData = useCallback(
+    async (url) => {
+      try {
+        setIsLoading(true);
+        await axios
+          .get(url, {
+            headers: {
+              "X-RapidAPI-Key": import.meta.env.VITE_REALTOR_KEY,
+              "X-RapidAPI-Host": "bayut.p.rapidapi.com",
+            },
+          })
+          .then((res) => {
+            setData(res?.data.hits);
+          });
+      } catch (err) {
+        throw Error("there is an error reload the page");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setData]
+  );
 
   return {
     fetchData: (url) => fetchData(url),
-    loading,
+    isLoading,
   };
 };
 

@@ -18,6 +18,7 @@ export default function Carousel({ photos }) {
     const slideInterval = setInterval(next, autoSlideInterval);
     return () => clearInterval(slideInterval);
   }, []);
+  //
   return (
     <div className="overflow-hidden relative">
       <div
@@ -26,7 +27,7 @@ export default function Carousel({ photos }) {
       >
         <img
           src={slides[curr] || ""}
-          style={{ width: "100%", height: "650px" }}
+          style={{ width: "100%", height: "500px" }}
           alt=""
         />
       </div>

@@ -14,17 +14,17 @@ const Selects = () => {
   return (
     <>
       <select
-        className="w-48 grow h-12 text-center hover:outline-none rounded-md font-bold text-xl cursor-pointer shadow-md"
+        className="w-48 grow h-9 text-center focus:outline-none rounded-md font-bold  cursor-pointer shadow-md"
         onChange={(e) => handleOnChange(e, "purpose")}
       >
-        <option className="text-xl font-bold py-4 " value="">
+        <option className=" font-semibold py-2 " value="">
           Purpos
         </option>
         <option value="for-rent">Rent</option>
         <option value="for-sale">Buy</option>
       </select>
       <select
-        className="w-48 grow h-12 text-center hover:outline-none rounded-md font-bold text-xl cursor-pointer shadow-md	"
+        className="w-48 grow h-9 text-center focus:outline-none rounded-md font-bold cursor-pointer shadow-md	"
         onChange={(e) => handleOnChange(e, "priceMax")}
       >
         <option>Max Price (AED)</option>
@@ -32,7 +32,7 @@ const Selects = () => {
         <option value="100000">100000</option>
       </select>
       <select
-        className="w-48 grow h-12 text-center hover:outline-none rounded-md font-bold text-xl cursor-pointer shadow-md"
+        className="w-48 grow h-9 text-center hover:outline-none rounded-md font-bold cursor-pointer shadow-md"
         onChange={(e) => handleOnChange(e, "priceMin")}
       >
         <option>Min Price (AED)</option>
@@ -40,7 +40,7 @@ const Selects = () => {
         <option value="50000">50000</option>
       </select>
       <select
-        className="w-48 grow h-12 text-center hover:outline-none rounded-md font-bold text-xl  cursor-pointer shadow-md"
+        className="w-48 grow h-9 text-center focus:outline-none rounded-md font-bold  cursor-pointer shadow-md"
         onChange={(e) => handleOnChange(e, "roomsMax")}
       >
         <option>Rooms</option>
@@ -48,7 +48,7 @@ const Selects = () => {
         <option value="2">2</option>
       </select>
       <select
-        className="w-48 grow h-12 text-center hover:outline-none rounded-md font-bold text-xl  cursor-pointer shadow-md"
+        className="w-48 grow h-9 text-center focus:outline-none rounded-md font-bold  cursor-pointer shadow-md"
         onChange={(e) => handleOnChange(e, "bathsMax")}
       >
         <option>Baths</option>
