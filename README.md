@@ -1,8 +1,14 @@
-# React + Vite
+# Realtor
+Realtor is a platform where you can purchase or rent apartments, houses, and
+various types of properties.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tech Stack
+Tech Stack: 
+            - React
+            - TailwindCss
+            - Reach Context
+            - RESTful API (from Rapid api)
 
-Currently, two official plugins are available:
+## Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://realtor-r235zuww2-aymanes-projects-27be667b.vercel.app/
